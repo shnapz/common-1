@@ -1,4 +1,7 @@
 import sbt._
+import pulse.plugin._
+import bintray.BintrayKeys._
+import sbt.Keys._
 
 object local {
   object dependencies {
@@ -11,4 +14,9 @@ object local {
       val core = "org.log4s" %% "log4s" % versions.log4s
     }
   }
+
+  def settings = Seq(
+    bintrayOrganization := Some("impulse-io"),
+    publishMavenStyle := true
+  )
 }
