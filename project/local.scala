@@ -8,7 +8,15 @@ object local {
 
     object versions {
       val log4s = "1.3.4"
+      object twitter {
+        val finagle = "6.42.0"
+      }
     }
+
+    object finagle {
+      val core   = "com.twitter" %% "finagle-http"   % versions.twitter.finagle
+    }
+
 
     object log4s {
       val core = "org.log4s" %% "log4s" % versions.log4s

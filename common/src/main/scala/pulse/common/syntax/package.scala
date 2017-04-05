@@ -1,3 +1,3 @@
 package pulse.common
 
-package object syntax extends Resources
+package object syntax extends Resources with TwitterFutureImplicits with PromiseOps
