@@ -9,6 +9,7 @@ libraryDependencies ++= Seq(
   apache.lang,
   log4s.core,
   cats.all,
+  finagle.core,
   _test(scalatest.core)
 )
 
