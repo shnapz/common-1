@@ -3,12 +3,9 @@ import pulse.plugin.dependencies._
 import local.dependencies._
 
 libraryDependencies ++= Seq(
-  fs2.core,
-  shapeless.core,
+  typesafe.config,
+  "co.fs2" %% "fs2-cats" % "0.3.0",
   refined.core,
-  apache.lang,
-  log4s.core,
-  cats.all,
   _test(scalatest.core)
 )
 
