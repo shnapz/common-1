@@ -7,7 +7,17 @@ import common._
 
 object Conf {
 
+  /**
+   * Creates an immutable configuration from the specified source
+   */
   def immutable (source: Source)(implicit from: ImmutableBuilder) = from(source)
+
+  /**
+   * Creates a mutable configuration from the specified source.
+   *
+   * Mutable configuration is able to subscribe to updates of the source and notify subscribers each time the source is updated
+   */
+  def mutable (source: Source)(implicit from: MutableBuilder) = from(source)
 
 }
 
@@ -23,4 +33,8 @@ abstract class Conf {
 
 trait ImmutableBuilder {
   def apply(source: Source): Task[Conf]
+}
+
+trait MutableBuilder {
+  def apply(source: Source): fs2.Stream[Task, Conf]
 }
