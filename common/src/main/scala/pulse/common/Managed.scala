@@ -8,5 +8,5 @@ trait Managed[A] {
   /**
    * Release the specified instance
    */
-  def close(instance: A): Unit
+  def close (instance: A): Unit
 }

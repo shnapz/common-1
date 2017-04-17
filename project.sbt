@@ -10,6 +10,8 @@ lazy val common   = project
 
 lazy val config   = project.dependsOn(common)
 
+lazy val examples = project.dependsOn(config, common)
+
 settings.common
 
 publishing.ignore
