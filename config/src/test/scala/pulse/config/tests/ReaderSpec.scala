@@ -5,7 +5,7 @@ import org.scalatest.{FlatSpec, ShouldMatchers}
 import eu.timepit.refined.auto._
 import fs2.interop.cats._
 
-import reader._
+import readers._
 import syntax._
 import typesafe._
 

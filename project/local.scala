@@ -4,13 +4,12 @@ import bintray.BintrayKeys._
 import sbt.Keys._
 
 object local {
-  object dependencies {
-    object versions {
-    }
-  }
 
   def settings = Seq(
     bintrayOrganization := Some("impulse-io"),
-    publishMavenStyle := true
+    publishMavenStyle   := true,
+    scalacOptions ++= Seq("-feature")
   )
+
+
 }
