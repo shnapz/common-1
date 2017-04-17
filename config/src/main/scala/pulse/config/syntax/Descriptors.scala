@@ -11,4 +11,10 @@ trait Descriptors {
 
   implicit val integerDescriptor: TypeDescriptor[Int]   = map[Int](Values.Int)
 
+  implicit val doubleDescriptor: TypeDescriptor[Double] = map[Double](Values.Double)
+
+  implicit val booleanDescriptor: TypeDescriptor[Boolean] = map[Boolean](Values.Boolean)
+
+  implicit val longDescriptor: TypeDescriptor[Long] = map[Long](Values.Long)
+
 }
