@@ -1,9 +1,9 @@
 package pulse
 package config
 
-import cats.data.EitherT
 import fs2.Task
-import common._
+import fs2.util.Attempt
+import pulse.common._
 
 object Conf {
 
@@ -36,5 +36,5 @@ trait ImmutableBuilder {
 }
 
 trait MutableBuilder {
-  def apply(source: Source): fs2.Stream[Task, Either[Throwable, Conf]]
+  def apply(source: Source): fs2.Stream[Task, Task[Attempt[Conf]]]
 }
