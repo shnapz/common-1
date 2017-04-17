@@ -7,7 +7,7 @@ import fs2.interop.cats._
 
 import common._
 
-object reader {
+object readers {
 
   val conf: ReaderConf[Conf] = Kleisli.ask[Task, Conf]
 

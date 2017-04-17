@@ -8,6 +8,8 @@ libraryDependencies ++= Seq(
   _test(scalatest.core)
 )
 
+settings.common
+
 publishing.settings
 
 local.settings

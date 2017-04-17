@@ -1,6 +1,5 @@
 import pulse.plugin._
 import pulse.plugin.dependencies._
-import local.dependencies._
 
 libraryDependencies ++= Seq(
   fs2.core,
@@ -9,9 +8,12 @@ libraryDependencies ++= Seq(
   apache.lang,
   log4s.core,
   cats.all,
+  fs2.cats,
   finagle.core,
   _test(scalatest.core)
 )
+
+settings.common
 
 publishing.settings
 

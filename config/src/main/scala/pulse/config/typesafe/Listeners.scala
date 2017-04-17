@@ -5,6 +5,7 @@ import java.nio.file._
 import java.util.concurrent.{Executors, ThreadFactory}
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder
+import com.typesafe.config.ConfigFactory
 import fs2.{Scheduler, Strategy, Stream, Task}
 import pulse.common._
 import pulse.common.syntax._
@@ -26,10 +27,14 @@ object Listeners {
 
   def file (path: Path, timeout: Int = defaultTimeout)(implicit St: Strategy = defaultWatchingStrategy, Sc: Scheduler = defaultSchedulingStrategy) =
     if (unavailable(path)) Stream.fail(ConfigException(s"File '$path' either does not exist or cannot be read")) else {
-      new FileWatcher(path, timeout).changes
+      fs2.Stream.eval(parse(path)) ++ new FileWatcher(path, timeout).changes
     }
 
   private def unavailable (p: Path) = !(Files.exists(p) && Files.isRegularFile(p) && Files.isReadable(p))
+
+  private def parse(p: Path) = Task.delay {
+    ConfigFactory.parseFile(p.toFile)
+  }
 
 }
 
