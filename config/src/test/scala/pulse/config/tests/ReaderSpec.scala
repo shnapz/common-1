@@ -39,42 +39,6 @@ class ReaderSpec extends FlatSpec with ShouldMatchers {
     }
   }
 
-  it should "read all value classes supported by Config" in {
-
-    val testValueInt = 120
-    val testValueDouble = 0.250
-    val testValueLong = 10L
-    val testValueBoolean = true
-
-    val section = for {
-      _ <- conf
-      int <- get[Int]("config.testInt")
-      double <- get[Double]("config.testDouble")
-      long <- get[Long]("config.testLong")
-      bool <- get[Boolean]("config.testBoolean")
-    } yield (int, double, long, bool)
-
-    val config =
-      s"""
-         |{
-         |   config {
-         |     testInt = $testValueInt
-         |     testDouble = $testValueDouble
-         |     testLong = $testValueLong
-         |     testBoolean = $testValueBoolean
-         |   }
-         |}
-      """.stripMargin
-
-    (section =<< Conf.immutable(Source.Raw(config))).unsafeRun() match {
-      case (int, double, long, bool) =>
-        int  shouldBe testValueInt
-        double shouldBe testValueDouble
-        long  shouldBe testValueLong
-        bool  shouldBe testValueBoolean
-    }
-  }
-
   it should "pick up nested sections" in {
 
     val testValueA = "testValueA"
