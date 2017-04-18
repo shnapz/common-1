@@ -2,8 +2,8 @@ package pulse
 package config
 
 import fs2.Task
-
-import common._
+import fs2.util.Attempt
+import pulse.common._
 
 object Conf {
 
@@ -36,5 +36,5 @@ trait ImmutableBuilder {
 }
 
 trait MutableBuilder {
-  def apply(source: Source): fs2.Stream[Task, Conf]
+  def apply(source: Source): fs2.Stream[Task, Attempt[Conf]]
 }

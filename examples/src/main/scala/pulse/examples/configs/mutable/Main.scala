@@ -1,21 +1,17 @@
 package pulse.examples.configs.mutable
 
 import java.io.File
-import org.log4s
-
-import fs2.{Stream, Task}
-import fs2.interop.cats._
 
 import eu.timepit.refined.auto._
-
+import fs2.interop.cats._
+import fs2.{Stream, Task}
+import org.log4s
 import pulse.common.exceptions._
-import pulse.common.logging
-import pulse.common._
-
-import pulse.config.{Conf, Source}
-import pulse.config.typesafe._
-import pulse.config.syntax._
+import pulse.common.{logging, _}
 import pulse.config.readers._
+import pulse.config.syntax._
+import pulse.config.typesafe._
+import pulse.config.{Conf, Source}
 
 object Main extends Runner {
 
@@ -30,7 +26,11 @@ object Main extends Runner {
   } yield (a,b,c)
 
   def program(from: File) = for {
-    c <- Conf.mutable(Source.FileSource(from))
+    ce <- Conf.mutable(Source.FileSource(from))
+    c <- ce.fold(fa => {
+        logging.error(s"Unable to parse file: ${from.getName}, exception: ${fa.getCause}")
+        Stream.empty
+      }, fb => Stream.emit(fb))
     v <- Stream.eval(reader(c))
     _ <- Stream.eval(logging.info(s"$v"))
   } yield ()
