@@ -26,11 +26,11 @@ object Main extends Runner {
   } yield (a,b,c)
 
   def program(from: File) = for {
-    c <- Conf.mutable(Source.FileSource(from))
-      .flatMap(s => s.fold(fa => {
+    ce <- Conf.mutable(Source.FileSource(from))
+    c <- ce.fold(fa => {
         logging.error(s"Unable to parse file: ${from.getName}, exception: ${fa.getCause}")
         Stream.empty
-      }, fb => Stream.emit(fb)))
+      }, fb => Stream.emit(fb))
     v <- Stream.eval(reader(c))
     _ <- Stream.eval(logging.info(s"$v"))
   } yield ()
