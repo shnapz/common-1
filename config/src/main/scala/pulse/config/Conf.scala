@@ -36,5 +36,5 @@ trait ImmutableBuilder {
 }
 
 trait MutableBuilder {
-  def apply(source: Source): fs2.Stream[Task, Task[Attempt[Conf]]]
+  def apply(source: Source): fs2.Stream[Task, Attempt[Conf]]
 }
